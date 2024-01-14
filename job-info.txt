@@ -1,0 +1,106 @@
+"Hello, my name is Chase Buchholz. I am a software engineer." +
+                    "I am writing a program that will generate bullet points for my resume based on a job description." +
+                    "I will give you a job description and list skills that I have and things I have done at my job" +
+                    "and I want you to take that and generate bullet points customized for the job description. " +
+                    "I need your response to be formatted as a json object, with a property called 'bullets', which will be an array" +
+                    "where each item is a string which will be the bullet point for the resume." +
+                    "Heres a description of me:" +
+                    "I am a software engineer at a marketing agency called Go Local Interactive, and I have 2.5 years" +
+                    "of experience. For the first year I worked on the front-end, building WordPress theme sites" +
+                    "for clients in the self-storage, pest control, multifamily, and banking industries." +
+                    " I developed plugins to enable features clients requested, integrated third-party" +
+                    " services and APIs, and developed features for those websites based on client requests. I also" +
+                    "collaborated with clients on custom wordpress themes, partipated in meetings with these clients" +
+                    "to gather requirements and implement solutions for their needs. I developed 2 dashboards with react," +
+                    "that consume our laravel APIs one for self-storage, and one for multifamily" +
+                    ", where clients could log in to view and edit their" +
+                    "properties and facilities. I created an updater api for our wordpress themes and plugins that," +
+                    "when a new version was pushed up to bitbucket, it would trigger a pipeline that would build" +
+                    "the asset, upload it to our s3 bucket, and add a record in the database. The API communicates with" +
+                    "the wordpress sites to check for updates to allow instant and automatic updates for our wordpress" +
+                    "plugins and themes so we dont have to go through 100 websites and update all the assets manually." +
+                    "I also created an image optimization script in python, that takes an image and continuously" +
+                    "compresses it until it is under a target size. We get several image optimzation tickets for a" +
+                    "client per week, and this saved us a ton of developer time translating to increased profits" +
+                    "for the company. I started an initiative to start testing our APIs, as before there were zero tests" +
+                    "of any kind. I set up a bitbucket pipeline that would build the project, create a database, seed it" +
+                    "and run tests, taking our test coverage from 0 to 73% in a couple months. I was responsible for" +
+                    "integrating additional property management systems, and facility management systems into our API," +
+                    "allowing us access to previously untapped customers. I conduct technical interviews, mentor newer" +
+                    "devs, review pull requests, and attend scrum meetings. My skills include Laravel, php, javascript," +
+                    "react, sql, mongodb, postgres, git, postman, bitbucket, phpunit, wordpress, express and node, html," +
+                    "and css. Here is the job description:" +
+                    "Full job description\n" +
+                    "CSC ONE H&R BLOCK WAY\n" +
+                    "KANSAS CITY\n" +
+                    "Missouri\n" +
+                    "What you'll do...\n" +
+                    "\n" +
+                    "Brings in strong experience in\n" +
+                    "C#, Web API development\n" +
+                    "MS SQL Server/Azure SQL\n" +
+                    "Angular or other SPA framework\n" +
+                    "Azure or other cloud experience\n" +
+                    "Works closely with senior, lead or principal software engineer to design, develop and maintain software components and products that support H&R Block business applications.\n" +
+                    "Uses tools, languages, coding standards and best practices to develop new product features and maintain year over year product functionality and enhancements.\n" +
+                    "Writes user stories and interacts with relevant stakeholders to get complete understanding\n" +
+                    "Creates and executes unit tests, integration tests and addresses defects.\n" +
+                    "Designs, develops and maintains software components\n" +
+                    "Creates and maintains documentation of design approaches\n" +
+                    "Creates and maintains documentation on internal architecture of the system.\n" +
+                    "Participates in technical design and code reviews for all new enhancements and maintenance work delivered.\n" +
+                    "Understands business and functional requirements and produces technical specifications and product requirements.\n" +
+                    "Maintains and improves current knowledge on the latest technologies relevant to the role regarding algorithms, language, design methodology, third-party development tools, application platforms, hardware compatibility and operating systems.\n" +
+                    "What you'll bring to the team...\n" +
+                    "\n" +
+                    "Education:\n" +
+                    "Bachelor’s degree in a related field or the equivalent through a combination of education and related work experience.\n" +
+                    "Work Experience:\n" +
+                    "3 years minimum related work experience\n" +
+                    "C#, Web API development\n" +
+                    "MS SQL Server/Azure SQL\n" +
+                    "Angular or other SPA framework\n" +
+                    "Azure or other cloud experience"
+
+Responsibilities:
+    Attend daily scrum meetings to discuss what we accomplished the previous day and any blockers we are experiencing.
+    Develop WordPress websites and plugins to support clients needs.
+    Attend meetings with client to discuss project requirements and answer questions..
+    Integrate third-party APIs and tools as per client request.
+    Mentor junior devs.
+    Work on our proprietary API for the self-storage and multifamily industries, developing features and
+    integrating with Facility Management Systems like StorEdge, SiteLink, SelfStorageEnterprise, Centershift,
+    DoorSwap, and Property Management Systems like Yardi, RentCafe, Entrata.
+
+Achievements:
+    Developed 2 dashboards with react, that consume our laravel APIs one for self-storage, and one for multifamily,
+    where clients could log in to view and edit their properties and facilities.
+    Created an updater api for our wordpress themes and plugins that, when a new version was pushed up to bitbucket,
+    it would trigger a pipeline that would build the asset, upload it to our s3 bucket, and add a record in the database.
+    The API communicates with the wordpress sites to check for updates to allow instant and automatic updates for our
+    wordpress plugins and themes so we dont have to go through 100 websites and update all the assets manually.
+    Created an image optimization script in python, that takes an image and continuously compresses it
+    until it is under a target size.
+    We get several image optimzation tickets for a client per week, and this saved us a ton of developer
+    time translating to increased profits for the company.
+    Started an initiative to start testing our APIs, as before there were zero tests of any kind.
+    I set up a bitbucket pipeline that would build the project, create a database, seed it and run tests,
+    taking our test coverage from 0 to 73% in a couple months.
+    Responsible for integrating additional property management systems, and facility management systems into our API,
+    allowing us access to previously untapped customers.
+    Conduct technical interviews, mentor newer devs, review pull requests, and attend scrum meetings.
+    Developed WordPress websites and plugins to support clients needs.
+    Attended meetings with client to discuss project requirements and answer questions.
+    Integrated third-party APIs and tools as per client request.
+    Mentored junior devs.
+    Worked on our proprietary API for the self-storage and multifamily industries, developing features and
+    integrating with Facility Management Systems like StorEdge, SiteLink, SelfStorageEnterprise, Centershift,
+    DoorSwap, and Property Management Systems like Yardi, RentCafe, Entrata.
+    Developed 2 dashboards with react, that consume our laravel APIs one for self-storage, and one for multifamily,
+    where clients could log in to view and edit their properties and facilities.
+    Created an updater api for our wordpress themes and plugins that, when a new version was pushed up to bitbucket,
+    it would trigger a pipeline that would build the asset, upload it to our s3 bucket, and allow
+    automatic updates for our wordpress plugins and themes so we dont have to go through 100 websites
+    and update all the assets manually.
+
+

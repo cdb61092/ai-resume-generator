@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../app/global.css"],
+  "sourcesContent": [".gutter {\n    background-color: darkgray;\n}\n\n.astronautIcon {\n    width: 50px;\n    vertical-align: middle;\n}"],
+  "mappings": ";AAAA;AACI;;AAGJ;AACI;AACA;;",
+  "names": []
+}

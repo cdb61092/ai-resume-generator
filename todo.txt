@@ -1,0 +1,15 @@
+strip extra chars from job desc
+try login without reloading page
+text prediction for filling in skills, languages, db's, tools, etc/.
+hide prisma fields like password
+required fields on forms
+update only dirty fields
+require user and getUserId functions
+delete education one at a time
+on experience tab, replace new job modal with a form in a new tab
+new icon library, replace delete button with trash icon
+order education and date by startdate
+cloudflare r2 for profile pics
+change root layout to grid instead of flexbox
+implement error boundaries
+fix dog shit prisma naming
