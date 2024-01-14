@@ -54,7 +54,10 @@ export function Header({ user }) {
                                         document.getElementById('logout-form') as HTMLFormElement
                                     ).submit()
                                 }>
-                                <Form action="/logout" id="logout-form" method="post">
+                                <Form
+                                    action="/resources.user.logout"
+                                    id="logout-form"
+                                    method="post">
                                     Sign Out
                                 </Form>
                             </DropdownItem>

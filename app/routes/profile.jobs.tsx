@@ -6,8 +6,7 @@ import { UpdateJobSchema } from '~/components/forms/schemas'
 import invariant from 'tiny-invariant'
 import { authenticator } from '~/utils/auth.server'
 import { prisma } from '~/utils/prisma.server'
-import { Form, Link, Outlet, useLoaderData } from '@remix-run/react'
-import { UpdateProfileForm } from '~/components/forms/UpdateProfileForm'
+import { Form, useLoaderData } from '@remix-run/react'
 import { ActionFunctionArgs, redirect } from '@remix-run/node'
 
 export async function loader({ request }) {
@@ -49,8 +48,7 @@ export async function action({ request }: ActionFunctionArgs) {
         return null
     }
 
-    const { company, title, location, startDate, endDate, responsibilities, achievements, id } =
-        submission.value
+    const { company, title, location, startDate, endDate, responsibilities, id } = submission.value
 
     await prisma.userJob.update({
         where: {

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../app/utils/index.ts"],
-  "sourcesContent": ["// REMIX HMR BEGIN\nimport * as __hmr__ from \"remix:hmr\";\nif (import.meta) {\nimport.meta.hot = __hmr__.createHotContext(\n//@ts-expect-error\n\"app\\\\utils\\\\index.ts\"\n);\nimport.meta.hot.lastModified = \"1702179426366.679\";\n}\n// REMIX HMR END\n\nexport const excerpt = (text: string, length = 1000) => {\n    if (text.length < length) return text\n    return `${text.slice(0, length)}...'`\n}\n\nexport function capitalize(str: string) {\n    return str.charAt(0).toUpperCase() + str.slice(1)\n}\n"],
-  "mappings": ";;;;;AAEA,IAAI,aAAa;AACjB,cAAY,MAAc;AAAA;AAAA,IAE1B;AAAA,EACA;AACA,cAAY,IAAI,eAAe;AAC/B;AAGO,IAAM,UAAU,CAAC,MAAc,SAAS,QAAS;AACpD,MAAI,KAAK,SAAS;AAAQ,WAAO;AACjC,SAAO,GAAG,KAAK,MAAM,GAAG,MAAM;AAClC;AAEO,SAAS,WAAW,KAAa;AACpC,SAAO,IAAI,OAAO,CAAC,EAAE,YAAY,IAAI,IAAI,MAAM,CAAC;AACpD;",
-  "names": []
-}

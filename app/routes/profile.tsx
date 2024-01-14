@@ -30,7 +30,7 @@ export async function loader({ request }: ActionFunctionArgs) {
             id: authUser.id,
         },
         include: {
-            UserJob: true,
+            userJob: true,
         },
     })
 

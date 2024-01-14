@@ -19,7 +19,7 @@ export function CreateJobForm() {
             navigate={false}
             {...form.props}
             method="post"
-            action="/addJob"
+            action="/resources.job.create"
             className="flex flex-col gap-4">
             <Input
                 type="text"

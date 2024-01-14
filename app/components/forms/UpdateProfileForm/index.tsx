@@ -8,7 +8,7 @@ export function UpdateProfileForm({ user }) {
         useForm()
 
     return (
-        <form {...form.props} method="post" action="/updateProfile">
+        <form {...form.props} method="post" action="/resources.profile.update.tsx">
             <div className="flex flex-col gap-y-3">
                 <div className="flex gap-5">
                     <Input

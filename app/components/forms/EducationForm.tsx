@@ -32,7 +32,7 @@ export function EducationForm({ education }) {
     const schoolList = useFieldList(form.ref, schools)
 
     return (
-        <Form method="post" {...form.props} action="/updateEducation">
+        <Form method="post" {...form.props} action="/resources.education.update">
             {schoolList.map((school) => (
                 <p key={school.key}>
                     <SchoolFieldSet {...school} />
