@@ -1,13 +1,11 @@
 import type { ActionFunctionArgs } from '@remix-run/node'
 import { useActionData } from '@remix-run/react'
-import { authenticator, register } from '~/utils/auth.server'
+import { authenticator } from '~/utils/auth.server'
 import { AuthSchema } from '~/components/forms/schemas'
 import { conform, useForm } from '@conform-to/react'
-import { Tabs, Tab, Input, Link, Button, Card, CardBody, CardHeader } from '@nextui-org/react'
+import { Tabs, Tab, Input, Link, Button, Card, CardBody } from '@nextui-org/react'
 import { parse } from '@conform-to/zod'
-import invariant from 'tiny-invariant'
 import React from 'react'
-import { json, redirect } from '@remix-run/node'
 
 export async function action({ request }: ActionFunctionArgs) {
     return await authenticator.authenticate('form', request, {
@@ -76,7 +74,10 @@ export default function Login() {
                             </form>
                         </Tab>
                         <Tab key="Register" title="Register">
-                            <form {...form.props} method="post" action="/register">
+                            <form
+                                {...form.props}
+                                method="post"
+                                action="/resources.user.register.tsx">
                                 <Input
                                     isRequired
                                     label="Email"

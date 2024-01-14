@@ -1,7 +1,7 @@
 import { ActionFunctionArgs } from '@remix-run/node'
 import { authenticator } from '~/utils/auth.server'
 import { parse } from '@conform-to/zod'
-import { UserJobSchema } from '~/components/forms/schemas'
+import { UpdateJobSchema } from '~/components/forms/schemas'
 import invariant from 'tiny-invariant'
 import { prisma } from '~/utils/prisma.server'
 import { redirect } from '@remix-run/node'
@@ -9,33 +9,42 @@ import { redirect } from '@remix-run/node'
 export async function action({ request }: ActionFunctionArgs) {
     let user = await authenticator.isAuthenticated(request)
 
-    if (!user) {
-        throw new Error('User is not authenticated')
-    }
+    invariant(user, 'User is not authenticated')
 
     const formData = await request.formData()
-    const submission = parse(formData, { schema: UserJobSchema })
-
-    console.log('submission')
-    console.log(submission)
+    const submission = parse(formData, { schema: UpdateJobSchema })
 
     invariant(submission.value, 'Bad form values')
 
-    const { company, title, location, startDate, endDate, responsibilities, achievements } =
-        submission.value
+    const { intent } = submission.payload
 
-    await prisma.userJob.create({
+    if ('delete' === intent) {
+        const { id } = submission.value
+
+        await prisma.userJob.delete({
+            where: {
+                id: id,
+            },
+        })
+
+        return redirect('/profile')
+    }
+
+    const { company, title, location, startDate, endDate, responsibilities, id } = submission.value
+
+    await prisma.userJob.update({
+        where: {
+            id: id,
+        },
         data: {
-            userId: user.id,
             company,
             title,
             location,
             startDate,
             endDate,
             responsibilities,
-            achievements,
         },
     })
 
-    return redirect('/profile/jobs')
+    return redirect('/profile')
 }

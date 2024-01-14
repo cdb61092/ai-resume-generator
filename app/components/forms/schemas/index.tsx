@@ -7,7 +7,6 @@ const UserJobSchema = z.object({
     startDate: z.string(),
     endDate: z.string(),
     responsibilities: z.string(),
-    achievements: z.string(),
 })
 
 const UpdateJobSchema = UserJobSchema.extend({

@@ -31,7 +31,11 @@ export function UpdateJobForm({ job }) {
     })
 
     return (
-        <form {...form.props} method="post" action="/updateJob" className="flex flex-col gap-4">
+        <form
+            {...form.props}
+            method="post"
+            action="/resources.job.update.tsx"
+            className="flex flex-col gap-4">
             <input type="hidden" {...conform.input(id)} value={job.id} />
             <Input
                 type="text"
