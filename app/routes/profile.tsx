@@ -30,7 +30,7 @@ export async function loader({ request }: ActionFunctionArgs) {
             id: authUser.id,
         },
         include: {
-            userJob: true,
+            jobExperience: true,
         },
     })
 
@@ -88,6 +88,9 @@ export default function Profile() {
                                 <Outlet />
                             </Tab>
                             <Tab key="/profile/jobs" as={Link} to="jobs" title="Experience">
+                                <Outlet />
+                            </Tab>
+                            <Tab key="/profile/projects" as={Link} to="projects" title="Projects">
                                 <Outlet />
                             </Tab>
                         </Tabs>

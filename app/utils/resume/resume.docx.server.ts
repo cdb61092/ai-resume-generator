@@ -145,6 +145,6 @@ export async function createDocxResume(user) {
 
     // Used to export the file into a .docx file
     Packer.toBuffer(doc).then((buffer) => {
-        fs.writeFileSync('app/generatedResumes/resume1.docx', buffer)
+        fs.writeFileSync('app/generatedResumes/resume.docx', buffer)
     })
 }

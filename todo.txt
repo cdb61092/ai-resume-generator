@@ -13,3 +13,4 @@ cloudflare r2 for profile pics
 change root layout to grid instead of flexbox
 implement error boundaries
 fix dog shit prisma naming
+change header back to row instead of column lol

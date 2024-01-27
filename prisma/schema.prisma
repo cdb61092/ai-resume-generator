@@ -8,25 +8,25 @@ datasource db {
 }
 
 model User {
-  id           Int         @id @default(autoincrement())
-  email        String      @unique
-  passwordHash String
-  firstName    String?
-  lastName     String?
-  profession   String?
-  location     String?
-  phoneNumber  String?
-  linkedIn     String?
-  github       String?
-  education    Education[]
-  languages    String[]
-  frameworks   String[]
-  tools        String[]
-  libraries    String[]
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-  userJob      UserJob[]
-  projects     Project[]
+  id            Int         @id @default(autoincrement())
+  email         String      @unique
+  passwordHash  String
+  firstName     String?
+  lastName      String?
+  profession    String?
+  location      String?
+  phoneNumber   String?
+  linkedIn      String?
+  github        String?
+  education     Education[]
+  languages     String[]
+  frameworks    String[]
+  tools         String[]
+  libraries     String[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  jobExperience UserJob[]
+  projects      Project[]
 }
 
 model Education {
@@ -34,6 +34,7 @@ model Education {
   user           User     @relation(fields: [userId], references: [id])
   userId         Int
   school         String
+  location       String   @default("NULL")
   degree         String?
   graduationDate String?
   createdAt      DateTime @default(now())
