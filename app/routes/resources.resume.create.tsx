@@ -17,7 +17,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
         where: { id: userId },
         include: {
             education: true,
-            userJob: true,
+            jobExperience: true,
             projects: true,
         },
     })

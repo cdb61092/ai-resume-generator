@@ -17,7 +17,7 @@ const schoolSchema = z.object({
     graduationDate: z.string().optional(),
 })
 
-const educationSchema = z.object({
+const formSchema = z.object({
     schools: z.array(schoolSchema).nonempty(),
 })
 
@@ -42,7 +42,7 @@ export async function action({ request }) {
 
     const formData = await request.formData()
     const submission = parse(formData, {
-        schema: educationSchema,
+        schema: formSchema,
     })
 
     invariant(submission.value, 'Bad form values')
@@ -97,7 +97,7 @@ export default function EducationForm() {
     const education = useLoaderData<typeof loader>()
     const [form, { schools }] = useForm({
         onValidate({ formData }) {
-            return parse(formData, { schema: educationSchema })
+            return parse(formData, { schema: formSchema })
         },
         shouldValidate: 'onBlur',
         defaultValue: {
