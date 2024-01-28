@@ -4,3 +4,8 @@ node_modules
 build
 public/build
 generatedResumes
+.cache/**
+Project.xml
+**/**/prettier.xml
+codeStyleConfig.xml
+.idea/**
