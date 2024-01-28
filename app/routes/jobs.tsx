@@ -43,9 +43,6 @@ export default function Jobs() {
     return (
         <div className="max-w-[1200px] mx-auto">
             <h1>Jobs</h1>
-            <Form action={'/jobs'} method={'post'}>
-                <input type={'submit'} value={'Create Resume'} />
-            </Form>
             <div>
                 <Skills
                     skills={skills}

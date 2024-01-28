@@ -15,24 +15,9 @@ const assistantInstructions = `You are an excellent resume reviewer, who returns
      from a job board site like LinkedIn. Your job is to generate the bullet points for my resume
      specifically tailored to the job description. Do not generate bullet points that highlight skills I
      do not have or have not mentioned to you, because that would make my resume dishonest.
-     Try to format these bullet points with the STAR method`
+     Try to format these bullet points with the STAR method. Finally, dont use the company name in the bullet points.`
 
-const jsonMode = async function (request) {
-    const user = await authenticator.isAuthenticated(request)
-    const formData = await request.formData()
-
-    const jobDescription = formData.get('jobDescription')
-
-    invariant(user, 'You must be logged in to use this feature')
-
-    const jobs = await prisma.userJob.findMany({
-        where: {
-            userId: user.id,
-        },
-    })
-
-    const experience = jobs[0].responsibilities
-
+const jsonMode = async function (jobDescription, responsibilities) {
     const result = await openai.chat.completions.create({
         messages: [
             {
@@ -41,16 +26,18 @@ const jsonMode = async function (request) {
             },
             {
                 role: 'user',
-                content: `Experience: ${experience}. Job Description: ${jobDescription}`,
+                content: `Experience: ${responsibilities}. Job Description: ${jobDescription}`,
             },
         ],
-        model: 'gpt-4-1106-preview',
+        model: 'gpt-4-0125-preview',
         response_format: { type: 'json_object' },
     })
 
     const content = result.choices[0].message.content
 
     const json = JSON.parse(content?.trim() ?? '')
+
+    console.log('bullets json', json)
 
     return json?.bullets
 }
