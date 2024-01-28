@@ -8,4 +8,6 @@ generatedResumes
 Project.xml
 **/**/prettier.xml
 codeStyleConfig.xml
-.idea/**
+.idea/*
+.idea
+scraper-remix.iml
