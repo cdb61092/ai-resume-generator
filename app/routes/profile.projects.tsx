@@ -42,20 +42,13 @@ export async function action({ request }) {
 
     invariant(authUser, 'User is not authenticated')
 
-    console.log('before validate')
     const result = await validator.validate(await request.formData())
-    console.log('after validate')
 
     if (result.error) {
-        console.log('validation error')
-        console.log(result.error)
         return validationError(result.error)
     }
 
     const { projects } = result.data
-
-    console.log('projects in action')
-    console.log(projects)
 
     await prisma.project.deleteMany({
         where: {
@@ -104,9 +97,7 @@ export default function ProjectForm() {
                     </>
                 )}
             </FieldArray>
-            <button type="submit" id="suh">
-                submitty
-            </button>
+            <button type="submit">Save</button>
         </ValidatedForm>
     )
 }

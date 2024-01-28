@@ -20,7 +20,7 @@ export const TableCellContent = ({ job, columnKey }) => {
             return excerpt(cellValue)
         case 'generateResume':
             return (
-                <Form action={'/jobs'} method={'post'}>
+                <Form action={'/resources/resume/create'} navigate={false} method={'post'}>
                     <input type="hidden" name="jobDescription" value={job.description} />
                     <input type={'submit'} value={'Create Resume'} />
                 </Form>

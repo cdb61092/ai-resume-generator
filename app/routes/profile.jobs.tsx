@@ -71,28 +71,7 @@ export default function Experience() {
     const { jobs } = useLoaderData<typeof loader>()
     const job = jobs[0]
     console.log(jobs)
-    const [
-        form,
-        { company, title, location, startDate, endDate, achievements, responsibilities, id },
-    ] = useForm({
-        // onValidate({formData}) {
-        //     return parse(formData, {schema: UpdateJobSchema});
-        // },
-        // shouldValidate: 'onBlur',
-        // onSubmit(event, { submission }) {
-        //     // invariant(submission.payload, 'Invalid payload')
-        //
-        //     const { intent } = submission.payload
-        //
-        //     if ('update' === intent) {
-        //         // return parse(submission.formData, { schema: UpdateJobSchema })
-        //     } else if ('delete' === intent) {
-        //         return {
-        //             id: submission.formData.get('id'),
-        //         }
-        //     }
-        // },
-    })
+    const [form, { company, title, location, startDate, endDate, responsibilities, id }] = useForm()
 
     return (
         <Tabs fullWidth>
