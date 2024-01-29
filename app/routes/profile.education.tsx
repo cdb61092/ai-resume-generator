@@ -143,21 +143,21 @@ function SchoolFieldSet({ listName, index, ...config }) {
                 type="text"
                 {...conform.input(school)}
                 onValueChange={(value) => setTitle(value)}
-                className="border-none bg-[#f5f5f5] rounded-xl p-2"
+                className="border-none p-2"
                 label="School"
                 placeholder="School"
             />
             <Input
                 type="text"
                 {...conform.input(degree)}
-                className="border-none bg-[#f5f5f5] rounded-xl p-2"
+                className="border-none p-2"
                 label="Degree"
                 placeholder="Degree"
             />
             <Input
                 type="text"
                 {...conform.input(graduationDate)}
-                className="border-none bg-[#f5f5f5] rounded-xl p-2"
+                className="border-none p-2"
                 label="Graduation Date"
                 placeholder="Graduation Date"
             />

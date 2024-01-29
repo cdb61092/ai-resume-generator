@@ -74,7 +74,10 @@ export default function Login() {
                             </form>
                         </Tab>
                         <Tab key="Register" title="Register">
-                            <form {...form.props} method="post" action="/resources/user/register">
+                            <form
+                                {...form.props}
+                                method="post"
+                                action="/resources/user/register">
                                 <Input
                                     isRequired
                                     label="Email"

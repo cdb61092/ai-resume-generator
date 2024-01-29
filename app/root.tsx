@@ -49,8 +49,8 @@ export default function App() {
             </head>
             <body className="min-h-screen bg-gray-100">
                 <NextUIProvider navigate={navigate}>
+                    <Header user={user} />
                     <div className="flex min-h-screen">
-                        <Header user={user} />
                         <main className="bg-gray-400 flex-grow">
                             <Outlet />
                         </main>
