@@ -77,7 +77,7 @@ export default function Login() {
                             <form
                                 {...form.props}
                                 method="post"
-                                action="/resources.user.register.tsx">
+                                action="/resources/user/register">
                                 <Input
                                     isRequired
                                     label="Email"
