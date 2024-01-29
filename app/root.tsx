@@ -1,5 +1,4 @@
 import {
-    Form,
     Links,
     LiveReload,
     Meta,
@@ -14,11 +13,9 @@ import { json, LinksFunction } from '@remix-run/node'
 import globals from '~/global.css'
 import tailwind from '~/tailwind.css'
 import { prisma } from './utils/prisma.server'
-import OpenAI from 'openai'
 import { Header } from '~/components/Navbar'
 import { NextUIProvider } from '@nextui-org/react'
 import { authenticator } from '~/utils/auth.server'
-import { jsonMode } from '~/utils/openai.server'
 
 export const links: LinksFunction = () => [
     { rel: 'stylesheet', href: globals },
@@ -35,10 +32,6 @@ export const loader = async ({ request }) => {
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-    const res = await jsonMode(request)
-
-    const content = res.choices[0].message.content ?? ''
-
     return json({ message: 'Hello world!' }, { status: 200 })
 }
 

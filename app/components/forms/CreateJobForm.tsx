@@ -6,20 +6,19 @@ import React from 'react'
 import { Form } from '@remix-run/react'
 
 export function CreateJobForm() {
-    const [form, { company, title, location, startDate, endDate, achievements, responsibilities }] =
-        useForm({
-            onValidate({ formData }) {
-                return parse(formData, { schema: UserJobSchema })
-            },
-            shouldValidate: 'onBlur',
-        })
+    const [form, { company, title, location, startDate, endDate, responsibilities }] = useForm({
+        onValidate({ formData }) {
+            return parse(formData, { schema: UserJobSchema })
+        },
+        shouldValidate: 'onBlur',
+    })
 
     return (
         <Form
             navigate={false}
             {...form.props}
             method="post"
-            action="/resources.job.create"
+            action="/resources/job/create"
             className="flex flex-col gap-4">
             <Input
                 type="text"
@@ -56,11 +55,6 @@ export function CreateJobForm() {
                 {...conform.input(responsibilities)}
                 className="border-none bg-[#f5f5f5] rounded-xl p-2"
                 minRows={5}
-            />
-            <Textarea
-                label="Achievements"
-                {...conform.input(achievements)}
-                className="border-none bg-[#f5f5f5] rounded-xl p-2"
             />
             <Button type="submit" color="success" fullWidth>
                 Save

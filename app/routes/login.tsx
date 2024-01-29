@@ -9,7 +9,7 @@ import React from 'react'
 
 export async function action({ request }: ActionFunctionArgs) {
     return await authenticator.authenticate('form', request, {
-        failureRedirect: '/',
+        failureRedirect: '/login',
         successRedirect: '/',
     })
 }
@@ -74,10 +74,7 @@ export default function Login() {
                             </form>
                         </Tab>
                         <Tab key="Register" title="Register">
-                            <form
-                                {...form.props}
-                                method="post"
-                                action="/resources.user.register.tsx">
+                            <form {...form.props} method="post" action="/resources/user/register">
                                 <Input
                                     isRequired
                                     label="Email"
