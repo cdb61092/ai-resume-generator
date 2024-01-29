@@ -21,6 +21,8 @@ import invariant from 'tiny-invariant'
 export async function loader({ request }: ActionFunctionArgs) {
     let authUser = await authenticator.isAuthenticated(request)
 
+    console.log(authUser)
+
     if (!authUser) {
         throw new Error('User is not authenticated')
     }
@@ -43,6 +45,8 @@ export default function Profile() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { user } = useLoaderData<typeof loader>()
     const navigation = useLocation()
+
+    console.log('pathname: ' + navigation.pathname)
 
     return (
         <IconContext.Provider value={{ style: { verticalAlign: 'middle' }, size: '40px' }}>

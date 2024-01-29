@@ -9,7 +9,7 @@ import React from 'react'
 
 export async function action({ request }: ActionFunctionArgs) {
     return await authenticator.authenticate('form', request, {
-        failureRedirect: '/',
+        failureRedirect: '/login',
         successRedirect: '/',
     })
 }

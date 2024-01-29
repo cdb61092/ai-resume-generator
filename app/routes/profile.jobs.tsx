@@ -8,6 +8,7 @@ import { authenticator } from '~/utils/auth.server'
 import { prisma } from '~/utils/prisma.server'
 import { Form, useLoaderData } from '@remix-run/react'
 import { ActionFunctionArgs, redirect } from '@remix-run/node'
+import { CreateJobForm } from '~/components/forms/CreateJobForm'
 
 export async function loader({ request }) {
     console.log('request')
@@ -69,12 +70,15 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export default function Experience() {
     const { jobs } = useLoaderData<typeof loader>()
-    const job = jobs[0]
-    console.log(jobs)
     const [form, { company, title, location, startDate, endDate, responsibilities, id }] = useForm()
 
     return (
         <Tabs fullWidth>
+            {jobs.length === 0 && (
+                <Tab title="New Company">
+                    <CreateJobForm />
+                </Tab>
+            )}
             {jobs.map((job) => (
                 <Tab key={job.id} title={job.title}>
                     <Form

@@ -13,7 +13,6 @@ export const Languages = ({ form, languages }) => {
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
             const val = e.target.value.trim()
-
             list.insert(languages.name, {
                 defaultValue: val,
             })
