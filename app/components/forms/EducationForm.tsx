@@ -54,25 +54,25 @@ function SchoolFieldSet({ ...config }) {
             <Input
                 type="text"
                 {...conform.input(school)}
-                className="border-none bg-[#f5f5f5] rounded-xl p-2"
+                className="border-none p-2"
                 placeholder="School"
             />
             <Input
                 type="text"
                 {...conform.input(degree)}
-                className="border-none bg-[#f5f5f5] rounded-xl p-2"
+                className="border-none p-2"
                 placeholder="Degree"
             />
             <Input
                 type="text"
                 {...conform.input(attendedFrom)}
-                className="border-none bg-[#f5f5f5] rounded-xl p-2"
+                className="border-none p-2"
                 placeholder="Start Date"
             />
             <Input
                 type="text"
                 {...conform.input(attendedTo)}
-                className="border-none bg-[#f5f5f5] rounded-xl p-2"
+                className="border-none p-2"
                 placeholder="End Date"
             />
         </fieldset>
