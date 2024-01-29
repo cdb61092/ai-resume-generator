@@ -5,36 +5,39 @@ import invariant from 'tiny-invariant'
 import { useLoaderData } from '@remix-run/react'
 import { Page, Document, Text, renderToStream } from '@react-pdf/renderer'
 import { PDFDocument } from '~/components/resume/Resume'
+import { scrape } from '~/utils/scraper/index.server'
 
 export async function loader({ request }: LoaderFunctionArgs) {
-    let authUser = await authenticator.isAuthenticated(request)
-
-    if (!authUser) {
-        throw new Error('User is not authenticated')
-    }
-
-    let user = await prisma.user.findUnique({
-        where: {
-            id: authUser.id,
-        },
-        include: {
-            jobExperience: true,
-            projects: true,
-            education: true,
-        },
-    })
-
-    invariant(user, 'User is not authenticated')
-
-    const base64 = await prisma.resume.findFirst().then((resume) => resume?.pdfData)
-
-    invariant(base64, 'Error reading base64 data')
-
-    const resume = Buffer.from(base64, 'base64')
-
-    // Headers for pdf file type
-    let headers = new Headers({ 'Content-Type': 'application/pdf' })
-    return new Response(resume, { status: 200, headers })
+    await scrape()
+    // let authUser = await authenticator.isAuthenticated(request)
+    //
+    // if (!authUser) {
+    //     throw new Error('User is not authenticated')
+    // }
+    //
+    // let user = await prisma.user.findUnique({
+    //     where: {
+    //         id: authUser.id,
+    //     },
+    //     include: {
+    //         jobExperience: true,
+    //         projects: true,
+    //         education: true,
+    //     },
+    // })
+    //
+    // invariant(user, 'User is not authenticated')
+    //
+    // const base64 = await prisma.resume.findFirst().then((resume) => resume?.pdfData)
+    //
+    // invariant(base64, 'Error reading base64 data')
+    //
+    // const resume = Buffer.from(base64, 'base64')
+    //
+    // // Headers for pdf file type
+    // let headers = new Headers({ 'Content-Type': 'application/pdf' })
+    // return new Response(resume, { status: 200, headers })
+    return null
 }
 
 // export default function Test() {
