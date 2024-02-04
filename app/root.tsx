@@ -8,12 +8,11 @@ import {
     useLoaderData,
     useNavigate,
 } from '@remix-run/react'
-import type { ActionFunctionArgs } from '@remix-run/node'
 import { json, LinksFunction } from '@remix-run/node'
 import globals from '~/global.css'
 import tailwind from '~/tailwind.css'
 import { prisma } from './utils/prisma.server'
-import { Header } from '~/components/Navbar'
+import { Header } from '~/components/header'
 import { NextUIProvider } from '@nextui-org/react'
 import { authenticator } from '~/utils/auth.server'
 
@@ -29,10 +28,6 @@ export const loader = async ({ request }) => {
     let user = await authenticator.isAuthenticated(request)
 
     return json({ jobs, skills, user }, { status: 200 })
-}
-
-export async function action({ request }: ActionFunctionArgs) {
-    return json({ message: 'Hello world!' }, { status: 200 })
 }
 
 export default function App() {
