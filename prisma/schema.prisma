@@ -9,6 +9,7 @@ datasource db {
 
 model User {
   id            Int           @id @default(autoincrement())
+  avatar        String?       @default("NULL")
   email         String        @unique
   passwordHash  String
   firstName     String?
@@ -44,6 +45,7 @@ model Education {
 
 model Job {
   id          Int          @id @default(autoincrement())
+  jobId       String       @unique
   title       String
   description String
   salary      String?
