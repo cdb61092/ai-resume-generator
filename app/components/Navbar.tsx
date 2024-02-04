@@ -23,6 +23,9 @@ export function Header({ user }) {
                         <Link to="profile" prefetch="render" className="hover:text-gray-700">
                             Profile
                         </Link>
+                        <Link to="applications" prefetch="render" className="hover:text-gray-700">
+                            Applications
+                        </Link>
                     </div>
                 </div>
                 <DarkModeToggle />
