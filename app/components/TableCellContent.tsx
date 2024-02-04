@@ -1,11 +1,6 @@
-// import { Job } from '../../types';
 import { excerpt } from '~/utils'
 import { Form } from '@remix-run/react'
 
-// type TableCellContentProps = {
-// 	job: Job;
-// 	columnKey: keyof Job;
-// }
 export const TableCellContent = ({ job, columnKey }) => {
     const cellValue = job[columnKey] || 'Gen'
 
