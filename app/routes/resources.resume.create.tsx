@@ -1,24 +1,12 @@
 import { requireUserId } from '~/utils/auth.server'
 import invariant from 'tiny-invariant'
 import { prisma } from '~/utils/prisma.server'
-import { ActionFunctionArgs, json, LoaderFunctionArgs } from '@remix-run/node'
-import { getSession } from '~/utils/session.server'
-import { createDocxResume } from '~/utils/resume/resume.docx.server'
-import { createPDFResume } from '~/utils/resume/resume.pdf.server'
+import { ActionFunctionArgs, json } from '@remix-run/node'
 import { jsonMode } from '~/utils/openai.server'
-import ReactPDF, {
-    Page,
-    renderToStream,
-    View,
-    Document,
-    Text,
-    renderToFile,
-} from '@react-pdf/renderer'
+import { renderToStream } from '@react-pdf/renderer'
 import { PDFDocument } from '~/components/resume/Resume'
-import PDFViewer = ReactPDF.PDFViewer
 
 export async function action({ request }: ActionFunctionArgs) {
-    console.log('in action')
     const userId = await requireUserId(request)
 
     invariant(userId, 'You must be logged in to use this feature')
@@ -40,8 +28,6 @@ export async function action({ request }: ActionFunctionArgs) {
         return acc.concat(job.responsibilities)
     }, '')
 
-    console.log(experience)
-
     const bullets = await jsonMode(jobDescription, experience)
 
     let stream = await renderToStream(<PDFDocument user={user} bullets={bullets} />)
@@ -60,8 +46,8 @@ export async function action({ request }: ActionFunctionArgs) {
 
     await prisma.resume.create({
         data: {
-            userId: user.id,
             pdfData: body.toString('base64'),
+            applicationId: 1,
         },
     })
 

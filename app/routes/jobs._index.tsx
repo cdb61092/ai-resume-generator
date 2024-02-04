@@ -1,4 +1,4 @@
-import { Form, useLoaderData } from '@remix-run/react'
+import { useLoaderData } from '@remix-run/react'
 import { Skills } from '~/components/Skills'
 import { ActionFunctionArgs, json } from '@remix-run/node'
 import { prisma } from '~/utils/prisma.server'
@@ -8,8 +8,6 @@ import { TableCellContent } from '~/components/TableCellContent'
 import { createDocxResume } from '~/utils/resume/resume.docx.server'
 
 export async function action({ request }: ActionFunctionArgs) {
-    console.log('sending request to openai')
-
     return await createDocxResume(request)
 }
 
@@ -20,7 +18,7 @@ export async function loader() {
     return json({ jobs, skills })
 }
 
-export default function Jobs() {
+export default function Jobs_index() {
     const { jobs, skills } = useLoaderData<typeof loader>()
     const [skillsFilter, setSkillsFilter] = React.useState(['all'])
 
@@ -39,6 +37,8 @@ export default function Jobs() {
 
         return filteredJobs
     }, [jobs, skillsFilter])
+
+    // console.log(jobs)
 
     return (
         <div className="max-w-[1200px] mx-auto">

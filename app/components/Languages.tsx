@@ -1,9 +1,8 @@
 import React from 'react'
 import { Chip, Input } from '@nextui-org/react'
-import { conform, useFieldList, list } from '@conform-to/react'
+import { useFieldList, list } from '@conform-to/react'
 
 export const Languages = ({ form, languages }) => {
-    // const [languages, setLanguages] = React.useState<string[]>([])
     const languageList = useFieldList(form.ref, languages)
 
     const handleClose = (languageToRemove, index) => {
@@ -18,8 +17,6 @@ export const Languages = ({ form, languages }) => {
             })
         }
     }
-
-    console.log(languages)
 
     return (
         <>

@@ -32,7 +32,6 @@ export async function loader({ request }) {
 }
 
 export async function action({ request }) {
-    console.log('action')
     let authUser = await authenticator.isAuthenticated(request)
 
     invariant(authUser, 'User is not authenticated')
@@ -45,8 +44,6 @@ export async function action({ request }) {
     invariant(submission.value, 'Bad form values')
 
     const { projects } = submission.value
-
-    console.log(projects)
 
     const allProjectIds = await prisma.project
         .findMany({
@@ -100,8 +97,6 @@ export default function ProjectForm() {
         },
     })
     const projectList = useFieldList(form.ref, projects)
-
-    console.log(projectData)
 
     return (
         <Form method="post" {...form.props}>

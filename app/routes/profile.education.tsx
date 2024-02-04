@@ -35,7 +35,6 @@ export async function loader({ request }) {
 }
 
 export async function action({ request }) {
-    console.log('action')
     let authUser = await authenticator.isAuthenticated(request)
 
     invariant(authUser, 'User is not authenticated')
@@ -48,8 +47,6 @@ export async function action({ request }) {
     invariant(submission.value, 'Bad form values')
 
     const { schools } = submission.value
-
-    console.log(schools)
 
     const allEducationIds = await prisma.education
         .findMany({
@@ -105,8 +102,6 @@ export default function EducationForm() {
         },
     })
     const schoolList = useFieldList(form.ref, schools)
-
-    console.log(education)
 
     return (
         <Form method="post" {...form.props}>

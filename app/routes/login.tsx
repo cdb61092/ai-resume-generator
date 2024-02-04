@@ -16,10 +16,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export default function Login() {
     const data = useActionData<typeof action>()
-    console.log(`data: ${data}`)
     const [selected, setSelected] = React.useState('Login')
-
-    console.log(selected)
 
     const [form, { email, password }] = useForm({
         onValidate({ formData }) {
@@ -74,10 +71,7 @@ export default function Login() {
                             </form>
                         </Tab>
                         <Tab key="Register" title="Register">
-                            <form
-                                {...form.props}
-                                method="post"
-                                action="/resources/user/register">
+                            <form {...form.props} method="post" action="/resources/user/register">
                                 <Input
                                     isRequired
                                     label="Email"

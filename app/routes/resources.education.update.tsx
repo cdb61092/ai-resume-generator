@@ -28,7 +28,7 @@ export async function action({ request }: ActionFunctionArgs) {
             id: authUser.id,
         },
         include: {
-            userJob: true,
+            jobExperience: true,
             education: true,
         },
     })
@@ -43,8 +43,6 @@ export async function action({ request }: ActionFunctionArgs) {
     invariant(submission.value, 'Bad form values')
 
     const { schools } = submission.value
-
-    console.log(schools)
 
     schools.map(async (school) => {
         if (school.id) {

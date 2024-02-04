@@ -7,13 +7,12 @@ import invariant from 'tiny-invariant'
 import { authenticator } from '~/utils/auth.server'
 import { prisma } from '~/utils/prisma.server'
 import { Form, useLoaderData } from '@remix-run/react'
-import { ActionFunctionArgs, redirect } from '@remix-run/node'
+import { ActionFunctionArgs } from '@remix-run/node'
 import { CreateJobForm } from '~/components/forms/CreateJobForm'
 
+// Loads the users job experience data
 export async function loader({ request }) {
-    console.log('request')
     let user = await authenticator.isAuthenticated(request)
-
     invariant(user, 'User is not authenticated')
 
     const jobs = await prisma.userJob.findMany({
@@ -25,6 +24,7 @@ export async function loader({ request }) {
     return { jobs }
 }
 
+// Updates the user's job experience
 export async function action({ request }: ActionFunctionArgs) {
     let user = await authenticator.isAuthenticated(request)
 
@@ -35,8 +35,10 @@ export async function action({ request }: ActionFunctionArgs) {
 
     invariant(submission.value, 'Bad form values')
 
+    // 'delete' or 'submit (update)'
     const { intent } = submission.payload
 
+    // Delete the job record
     if ('delete' === intent) {
         const { id } = submission.value
 
@@ -51,6 +53,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
     const { company, title, location, startDate, endDate, responsibilities, id } = submission.value
 
+    // Update the job record
     await prisma.userJob.update({
         where: {
             id: id,
@@ -91,41 +94,41 @@ export default function Experience() {
                             type="text"
                             label="Company"
                             {...conform.input(company)}
-                            className="border-none bg-[#f5f5f5] rounded-xl p-2"
+                            className="border-none rounded-lg"
                             defaultValue={job.company}
                         />
                         <Input
                             type="text"
                             label="Title"
                             {...conform.input(title)}
-                            className="border-none bg-[#f5f5f5] rounded-xl p-2"
+                            className="border-none rounded-xl"
                             defaultValue={job.title}
                         />
                         <Input
                             type="text"
                             label="Location"
                             {...conform.input(location)}
-                            className="border-none bg-[#f5f5f5] rounded-xl p-2"
+                            className="border-none rounded-xl"
                             defaultValue={job.location}
                         />
                         <Input
                             type="text"
                             label="Start Date"
                             {...conform.input(startDate)}
-                            className="border-none bg-[#f5f5f5] rounded-xl p-2"
+                            className="border-none rounded-xl"
                             defaultValue={job.startDate}
                         />
                         <Input
                             type="text"
                             label="End Date"
                             {...conform.input(endDate)}
-                            className="border-none bg-[#f5f5f5] rounded-xl p-2"
+                            className="border-none rounded-xl"
                             defaultValue={job.endDate}
                         />
                         <Textarea
                             label="Responsibilities"
                             {...conform.input(responsibilities)}
-                            className="border-none bg-[#f5f5f5] rounded-xl p-2"
+                            className="border-none rounded-xl"
                             defaultValue={job.responsibilities}
                         />
                         <Button

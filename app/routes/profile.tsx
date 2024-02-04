@@ -1,19 +1,12 @@
 import React from 'react'
 import { Card, CardHeader, CardBody, Divider, Button, Tabs, Tab } from '@nextui-org/react'
 import { FaUserAstronaut } from 'react-icons/fa/index.js'
-import { Link, Outlet, useLoaderData, useLocation } from '@remix-run/react'
+import { Link as RemixLink, Outlet, useLoaderData, useLocation } from '@remix-run/react'
 import { IconContext } from 'react-icons'
 import { ActionFunctionArgs } from '@remix-run/node'
 import { prisma } from '~/utils/prisma.server'
 import { authenticator } from '~/utils/auth.server'
-import {
-    Modal,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    useDisclosure,
-} from '@nextui-org/react'
+import { Modal, ModalContent, ModalHeader, ModalBody, useDisclosure } from '@nextui-org/react'
 import { CreateJobForm } from '~/components/forms/CreateJobForm'
 import { UpdateProfileForm } from '~/components/forms/UpdateProfileForm'
 import invariant from 'tiny-invariant'
@@ -21,11 +14,7 @@ import invariant from 'tiny-invariant'
 export async function loader({ request }: ActionFunctionArgs) {
     let authUser = await authenticator.isAuthenticated(request)
 
-    console.log(authUser)
-
-    if (!authUser) {
-        throw new Error('User is not authenticated')
-    }
+    invariant(authUser, 'User is not authenticated')
 
     let user = await prisma.user.findUnique({
         where: {
@@ -36,8 +25,6 @@ export async function loader({ request }: ActionFunctionArgs) {
         },
     })
 
-    invariant(user, 'User is not authenticated')
-
     return { user }
 }
 
@@ -45,8 +32,6 @@ export default function Profile() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { user } = useLoaderData<typeof loader>()
     const navigation = useLocation()
-
-    console.log('pathname: ' + navigation.pathname)
 
     return (
         <IconContext.Provider value={{ style: { verticalAlign: 'middle' }, size: '40px' }}>
@@ -81,20 +66,22 @@ export default function Profile() {
                     <Divider className="bg-gray-400" />
                     <CardBody>
                         <Tabs fullWidth selectedKey={navigation.pathname}>
-                            <Tab key="/profile" title="Profile" as={Link} to=".">
+                            <Tab key="/profile" title={<RemixLink to=".">Profile</RemixLink>}>
                                 <UpdateProfileForm user={user} />
                             </Tab>
                             <Tab
                                 key="/profile/education"
-                                title="Education"
-                                as={Link}
-                                to="education">
+                                title={<RemixLink to="education">Education</RemixLink>}>
                                 <Outlet />
                             </Tab>
-                            <Tab key="/profile/jobs" as={Link} to="jobs" title="Experience">
+                            <Tab
+                                key="/profile/jobs"
+                                title={<RemixLink to="jobs">Experience</RemixLink>}>
                                 <Outlet />
                             </Tab>
-                            <Tab key="/profile/projects" as={Link} to="projects" title="Projects">
+                            <Tab
+                                key="/profile/projects"
+                                title={<RemixLink to="projects">Projects</RemixLink>}>
                                 <Outlet />
                             </Tab>
                         </Tabs>

@@ -128,7 +128,6 @@ export async function createDocxResume(user) {
         education,
         projects,
     } = user
-    console.log(user)
 
     const doc = new Document({
         sections: [

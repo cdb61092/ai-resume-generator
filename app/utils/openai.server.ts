@@ -37,8 +37,6 @@ const jsonMode = async function (jobDescription, responsibilities) {
 
     const json = JSON.parse(content?.trim() ?? '')
 
-    console.log('bullets json', json)
-
     return json?.bullets
 }
 

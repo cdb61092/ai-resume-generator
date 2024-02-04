@@ -14,47 +14,47 @@ export function UpdateProfileForm({ user }) {
                     <Input
                         type="text"
                         label="First Name"
-                        defaultValue={user?.firstName as string}
+                        defaultValue={user.firstName}
                         {...conform.input(firstName)}
-                        className="border-none bg-[#f5f5f5] rounded-xl"
+                        className="border-none rounded-xl"
                     />
                     <Input
                         type="text"
                         label="Last Name"
-                        defaultValue={user?.lastName as string}
+                        defaultValue={user.lastName}
                         {...conform.input(lastName)}
-                        className="border-none bg-[#f5f5f5] rounded-xl"
+                        className="border-none rounded-xl"
                     />
                 </div>
                 <Input
                     type="text"
                     label="Profession"
-                    defaultValue={user?.profession as string}
+                    defaultValue={user.profession}
                     {...conform.input(profession)}
-                    className="border-none bg-[#f5f5f5] rounded-xl"
+                    className="border-none rounded-xl"
                 />
                 <Input
                     type="text"
                     label="Location"
-                    defaultValue={user?.location as string}
+                    defaultValue={user.location}
                     {...conform.input(location)}
                 />
                 <Input
                     type="text"
                     label="Phone Number"
-                    defaultValue={user?.phoneNumber as string}
+                    defaultValue={user.phoneNumber}
                     {...conform.input(phoneNumber)}
                 />
                 <Input
                     type="text"
                     label="LinkedIn"
-                    defaultValue={user?.linkedIn as string}
+                    defaultValue={user.linkedIn}
                     {...conform.input(linkedIn)}
                 />
                 <Input
                     type="text"
                     label="GitHub"
-                    defaultValue={user?.github as string}
+                    defaultValue={user.github}
                     {...conform.input(github)}
                 />
                 <ChipSelect currentItems={user.languages} collectionName="languages" />

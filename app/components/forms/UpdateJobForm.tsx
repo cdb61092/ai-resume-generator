@@ -1,34 +1,12 @@
-import { parse } from '@conform-to/zod'
 import { useForm, conform } from '@conform-to/react'
 import { Button, Input, Textarea } from '@nextui-org/react'
 import React from 'react'
-import { UpdateJobSchema } from '~/components/forms/schemas'
-import invariant from 'tiny-invariant'
 
 export function UpdateJobForm({ job }) {
-    console.log(`job: ${job}`)
     const [
         form,
         { company, title, location, startDate, endDate, achievements, responsibilities, id },
-    ] = useForm({
-        // onValidate({formData}) {
-        //     return parse(formData, {schema: UpdateJobSchema});
-        // },
-        // shouldValidate: 'onBlur',
-        // onSubmit(event, { submission }) {
-        //     // invariant(submission.payload, 'Invalid payload')
-        //
-        //     const { intent } = submission.payload
-        //
-        //     if ('update' === intent) {
-        //         // return parse(submission.formData, { schema: UpdateJobSchema })
-        //     } else if ('delete' === intent) {
-        //         return {
-        //             id: submission.formData.get('id'),
-        //         }
-        //     }
-        // },
-    })
+    ] = useForm()
 
     return (
         <form

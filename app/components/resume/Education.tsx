@@ -3,7 +3,6 @@ import { styles } from '~/components/resume/styles'
 import { Section } from './Section'
 
 export function Education({ education }) {
-    console.log(education)
     return (
         <Section title="EDUCATION">
             {education.map(({ school, location, degree, graduationDate }) => (

@@ -17,12 +17,7 @@ const educationSchema = z.object({
     schools: z.array(schoolSchema).nonempty(),
 })
 
-export async function loader({ request }) {
-    console.log('request')
-}
-
 export function EducationForm({ education }) {
-    console.log(education)
     const [form, { schools }] = useForm({
         onValidate({ formData }) {
             return parse(formData, { schema: educationSchema })
