@@ -42,15 +42,12 @@ export default function App() {
                 <Meta />
                 <Links />
             </head>
-            <body className="min-h-screen bg-gray-100">
+            <body className="min-h-screen dark:text-white text-black bg-white dark:bg-gray-600">
                 <NextUIProvider navigate={navigate}>
                     <Header user={user} />
-                    <div className="flex min-h-screen">
-                        <main className="bg-gray-400 flex-grow">
-                            <Outlet />
-                        </main>
+                    <div className="max-w-[1200px] mx-auto">
+                        <Outlet />
                     </div>
-
                     <ScrollRestoration />
                     <Scripts />
                     <LiveReload />

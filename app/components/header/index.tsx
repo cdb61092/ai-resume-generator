@@ -8,7 +8,7 @@ const links = ['Jobs', 'Profile', 'Applications']
 
 export function Header({ user }) {
     return (
-        <div className="bg-white dark:bg-gray-800 flex justify-center">
+        <div className="bg-white dark:bg-gray-800 flex justify-center border-b-1">
             <div className="w-[1200px] flex justify-between items-center py-5">
                 <Logo />
                 <NavLinks links={links} />

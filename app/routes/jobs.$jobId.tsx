@@ -2,6 +2,7 @@ import { json, LoaderFunctionArgs } from '@remix-run/node'
 import { prisma } from '~/utils/prisma.server'
 import { useLoaderData } from '@remix-run/react'
 import invariant from 'tiny-invariant'
+import { Textarea } from '@nextui-org/react'
 
 export async function loader({ params }: LoaderFunctionArgs) {
     const job = await prisma.job.findUnique({
@@ -19,9 +20,10 @@ export default function JobListing() {
     const { title, description, company, location, salary, keywords, source } =
         useLoaderData<typeof loader>()
     return (
-        <div>
-            <h1>Title: {title}</h1>
-            <p>Description: {description}</p>
+        <div className="pt-3 text-2xl">
+            <h2>Title: {title}</h2>
+            <h2>Description:</h2>
+            <p className="text-lg">{description}</p>
             <p>Company: {company}</p>
             <p>Location: {location}</p>
             <p>Salary: {salary}</p>

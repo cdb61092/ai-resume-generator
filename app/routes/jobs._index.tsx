@@ -6,6 +6,8 @@ import { Table, TableBody, TableColumn, TableRow, TableCell, TableHeader } from 
 import React from 'react'
 import { TableCellContent } from '~/components/TableCellContent'
 import { createDocxResume } from '~/utils/resume/resume.docx.server'
+import { categorizeSkills } from '~/utils/categorizeSkills.server'
+import { JobFilters } from '~/components/jobFilters'
 
 export async function action({ request }: ActionFunctionArgs) {
     return await createDocxResume(request)
@@ -15,10 +17,12 @@ export async function loader() {
     const jobs = await prisma.job.findMany()
     const skills = Array.from(new Set(jobs.flatMap((job) => job.keywords))).sort()
 
-    return json({ jobs, skills })
+    const categorizedSkills = categorizeSkills(skills)
+
+    return json({ jobs, skills: categorizedSkills })
 }
 
-export default function Jobs_index() {
+export default function Jobs() {
     const { jobs, skills } = useLoaderData<typeof loader>()
     const [skillsFilter, setSkillsFilter] = React.useState(['all'])
 
@@ -38,31 +42,23 @@ export default function Jobs_index() {
         return filteredJobs
     }, [jobs, skillsFilter])
 
-    // console.log(jobs)
-
     return (
-        <div className="max-w-[1200px] mx-auto">
-            <h1>Jobs</h1>
-            <div>
-                <Skills
-                    skills={skills}
-                    skillsFilter={skillsFilter}
-                    setSkillsFilter={setSkillsFilter}
-                />
-            </div>
-
-            <Table topContent={`${filteredItems.length} jobs`} className="mt-3">
+        <div className="mx-auto flex gap-3 pt-3 ">
+            <JobFilters
+                skills={skills}
+                skillsFilter={skillsFilter}
+                setSkillsFilter={setSkillsFilter}
+            />
+            <Table topContent={`${filteredItems.length} jobs`}>
                 <TableHeader>
                     <TableColumn key="title" className="w-[100px]">
                         Title
                     </TableColumn>
-                    <TableColumn key="description">Description</TableColumn>
                     <TableColumn key="salary">Salary</TableColumn>
                     <TableColumn key="keywords">Skills</TableColumn>
                     <TableColumn key="company">Company</TableColumn>
                     <TableColumn key="location">Location</TableColumn>
                     <TableColumn key="source">Source</TableColumn>
-                    <TableColumn key="generateResume">Gen</TableColumn>
                 </TableHeader>
                 <TableBody items={filteredItems}>
                     {(item) => {

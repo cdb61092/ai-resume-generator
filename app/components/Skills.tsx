@@ -1,28 +1,38 @@
-import { Button } from '@nextui-org/react'
+import { Accordion, AccordionItem, Button, Checkbox } from '@nextui-org/react'
 import React from 'react'
 
-export const Skills = ({ skills, skillsFilter, setSkillsFilter }) => {
+interface SkillsProps {
+    skills: Record<string, string[]>
+    skillsFilter: any
+    setSkillsFilter: (filter: any) => void
+}
+
+export const Skills = ({ skills, skillsFilter, setSkillsFilter }: SkillsProps) => {
     return (
-        <div>
-            <h3 className="text-left text-2xl my-3">Skills</h3>
-            <div className="flex flex-wrap gap-2 bg-black rounded-2xl">
-                {skills.map((skill: string) => {
-                    return (
-                        <Button
-                            key={skill}
-                            onClick={() =>
-                                setSkillsFilter(
-                                    skillsFilter.includes(skill)
-                                        ? skillsFilter.filter((s: string) => s !== skill)
-                                        : [...skillsFilter, skill]
-                                )
-                            }
-                            color={skillsFilter.includes(skill) ? 'success' : 'default'}>
-                            {skill}
-                        </Button>
-                    )
-                })}
-            </div>
-        </div>
+        <Accordion selectionMode="multiple" title="Skills">
+            {Object.entries(skills).map(([category, skillsInCategory]) => (
+                <AccordionItem title={category} className="overflow-x-hidden">
+                    <div key={category} className="flex-col flex">
+                        {skillsInCategory.map((skill) => (
+                            <Checkbox
+                                className="dark:text-white light:text-black"
+                                value={skill}
+                                isSelected={skillsFilter.includes(skill)}
+                                onChange={(e) => {
+                                    if (e.target.checked) {
+                                        setSkillsFilter((prev: any) => [...prev, skill])
+                                    } else {
+                                        setSkillsFilter((prev: any) =>
+                                            prev.filter((s: any) => s !== skill)
+                                        )
+                                    }
+                                }}>
+                                {skill}
+                            </Checkbox>
+                        ))}
+                    </div>
+                </AccordionItem>
+            ))}
+        </Accordion>
     )
 }
