@@ -12,7 +12,7 @@ export function UpdateJobForm({ job }) {
         <form
             {...form.props}
             method="post"
-            action="/resources.job.update.tsx"
+            action="/resources/job/update"
             className="flex flex-col gap-4">
             <input type="hidden" {...conform.input(id)} value={job.id} />
             <Input
