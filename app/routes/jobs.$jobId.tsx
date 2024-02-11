@@ -1,13 +1,15 @@
-import { json, LoaderFunctionArgs } from '@remix-run/node'
+import { ActionFunctionArgs, json, LoaderFunctionArgs } from '@remix-run/node'
 import { prisma } from '~/utils/prisma.server'
-import { useLoaderData } from '@remix-run/react'
+import { Form, Link, useLoaderData } from '@remix-run/react'
 import invariant from 'tiny-invariant'
-import { Textarea } from '@nextui-org/react'
+import { Button, Textarea } from '@nextui-org/react'
 
 export async function loader({ params }: LoaderFunctionArgs) {
+    invariant(params.jobId, 'Job not found')
+    console.log('job id in jobs.$jobId:', params.jobId)
     const job = await prisma.job.findUnique({
         where: {
-            jobId: params.jobId,
+            id: parseInt(params.jobId),
         },
     })
 
@@ -21,14 +23,22 @@ export default function JobListing() {
         useLoaderData<typeof loader>()
     return (
         <div className="pt-3 text-2xl">
-            <h2>Title: {title}</h2>
-            <h2>Description:</h2>
-            <p className="text-lg">{description}</p>
-            <p>Company: {company}</p>
-            <p>Location: {location}</p>
+            <Link to="apply">Apply</Link>
+            <h2>
+                {company} - {title}
+            </h2>
             <p>Salary: {salary}</p>
+            <p>{location}</p>
+            <p className="text-lg">{description}</p>
             <p>Keywords: {keywords}</p>
             <p>Source: {source}</p>
+            <Form navigate={false} method="post" action="/resources/resume/create">
+                <Button type="submit">Create Resume</Button>
+            </Form>
         </div>
     )
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+    return json({ success: true })
 }
