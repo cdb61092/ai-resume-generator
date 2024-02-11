@@ -6,7 +6,7 @@ import { jsonMode } from '~/utils/openai.server'
 import { renderToStream } from '@react-pdf/renderer'
 import { PDFDocument } from '~/components/resume/Resume'
 
-export async function action({ request }: ActionFunctionArgs) {
+export async function action({ request, params }: ActionFunctionArgs) {
     const userId = await requireUserId(request)
 
     invariant(userId, 'You must be logged in to use this feature')
@@ -23,6 +23,8 @@ export async function action({ request }: ActionFunctionArgs) {
     invariant(user, 'User not found')
 
     const formData = await request.formData()
+    const applicationId = formData.get('applicationId')
+    invariant(applicationId, 'Application not found')
     const jobDescription = formData.get('jobDescription')
     const experience = user.jobExperience.reduce((acc, job) => {
         return acc.concat(job.responsibilities)
@@ -44,12 +46,14 @@ export async function action({ request }: ActionFunctionArgs) {
         stream.on('error', reject)
     })
 
-    await prisma.resume.create({
-        data: {
-            pdfData: body.toString('base64'),
-            applicationId: 1,
-        },
-    })
+    if (typeof applicationId === 'string') {
+        await prisma.resume.create({
+            data: {
+                pdfData: body.toString('base64'),
+                applicationId: parseInt(applicationId),
+            },
+        })
+    }
 
     // finally create the Response with the correct Content-Type header for
     // a PDF
