@@ -3,7 +3,12 @@ import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import React from 'react'
 
 export function DarkModeToggle() {
-    const [darkMode, setDarkMode] = React.useState(false)
+    const [darkMode, setDarkMode] = React.useState(() => {
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem('theme') === 'dark'
+        }
+        return false // Default state when not in a browser environment
+    })
 
     React.useEffect(() => {
         if (darkMode) {
