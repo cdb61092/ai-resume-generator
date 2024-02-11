@@ -6,7 +6,7 @@ export function NavLinks({ links }) {
         <div className="flex-grow">
             <div className="flex justify-center space-x-4">
                 {links.map((link) => (
-                    <Link to={link.toLowerCase()} className="hover:text-gray-700">
+                    <Link to={link.toLowerCase()} className="hover:text-gray-700" key={link}>
                         {link}
                     </Link>
                 ))}
