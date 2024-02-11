@@ -45,7 +45,7 @@ export default function App() {
             <body className="min-h-screen dark:text-white text-black bg-white dark:bg-gray-600">
                 <NextUIProvider navigate={navigate}>
                     <Header user={user} />
-                    <div className="max-w-[1200px] mx-auto">
+                    <div className="max-w-[1400px] mx-auto pt-5">
                         <Outlet />
                     </div>
                     <ScrollRestoration />
