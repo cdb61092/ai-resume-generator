@@ -11,7 +11,7 @@ export const TableCellContent = ({ job, columnKey }) => {
 
     switch (columnKey) {
         case 'title':
-            return <a href={`/jobs/${job.jobId}`}>{cellValue}</a>
+            return <a href={`/jobs/${job.id}`}>{cellValue}</a>
 
         // Display only the first x characters of the description
         case 'description':
