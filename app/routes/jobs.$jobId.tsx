@@ -3,6 +3,8 @@ import { prisma } from '~/utils/prisma.server'
 import { Form, Link, useLoaderData } from '@remix-run/react'
 import invariant from 'tiny-invariant'
 import { Button, Textarea } from '@nextui-org/react'
+import React from 'react'
+import { JobDescription } from '~/components/JobDescription'
 
 export async function loader({ params }: LoaderFunctionArgs) {
     invariant(params.jobId, 'Job not found')
@@ -13,14 +15,18 @@ export async function loader({ params }: LoaderFunctionArgs) {
         },
     })
 
+    console.log('job in jobs.$jobId:', job)
+
     invariant(job, 'Job not found')
 
     return json(job)
 }
 
 export default function JobListing() {
-    const { title, description, company, location, salary, keywords, source } =
+    const { title, description, descriptionHTML, company, location, salary, keywords, source } =
         useLoaderData<typeof loader>()
+
+    const noEmptyDivs = descriptionHTML?.replace(/<br>/g, '')
     return (
         <div className="pt-3 text-2xl">
             <Link to="apply">Apply</Link>
@@ -29,10 +35,10 @@ export default function JobListing() {
             </h2>
             <p>Salary: {salary}</p>
             <p>{location}</p>
-            <p className="text-lg">{description}</p>
+            <JobDescription description={description} descriptionHTML={noEmptyDivs} />
             <p>Keywords: {keywords}</p>
             <p>Source: {source}</p>
-            <Form navigate={false} method="post" action="/resources/resume/create">
+            <Form navigate={false} method="post" action={'/resources/resume/create'}>
                 <Button type="submit">Create Resume</Button>
             </Form>
         </div>

@@ -5,6 +5,8 @@ import { ActionFunctionArgs, json } from '@remix-run/node'
 import { jsonMode } from '~/utils/openai/resume.server'
 import { renderToStream } from '@react-pdf/renderer'
 import { PDFDocument } from '~/components/resume/Resume'
+import { generateCoverLetter } from '~/utils/openai/coverletter.server'
+import { CoverLetter } from '~/components/coverLetter'
 
 export async function action({ request, params }: ActionFunctionArgs) {
     const userId = await requireUserId(request)
@@ -23,16 +25,29 @@ export async function action({ request, params }: ActionFunctionArgs) {
     invariant(user, 'User not found')
 
     const formData = await request.formData()
-    const applicationId = formData.get('applicationId')
+    const applicationId = formData.get('applicationId') as string
     invariant(applicationId, 'Application not found')
+    const application = await prisma.application.findUnique({
+        where: {
+            id: parseInt(applicationId),
+        },
+        include: {
+            job: true,
+        },
+    })
+
+    invariant(application, 'Application not found')
+
     const jobDescription = formData.get('jobDescription')
     const experience = user.jobExperience.reduce((acc, job) => {
         return acc.concat(job.responsibilities)
     }, '')
 
-    const bullets = await jsonMode(jobDescription, experience)
+    const coverLetterText = await generateCoverLetter(jobDescription, experience)
 
-    let stream = await renderToStream(<PDFDocument user={user} bullets={bullets} />)
+    let stream = await renderToStream(
+        <CoverLetter user={user} coverLetterText={coverLetterText} job={application.job} />
+    )
 
     // Transform it to a Buffer to send in the Response
     let body: Buffer = await new Promise((resolve, reject) => {
@@ -46,14 +61,12 @@ export async function action({ request, params }: ActionFunctionArgs) {
         stream.on('error', reject)
     })
 
-    if (typeof applicationId === 'string') {
-        await prisma.resume.create({
-            data: {
-                pdfData: body.toString('base64'),
-                applicationId: parseInt(applicationId),
-            },
-        })
-    }
+    await prisma.coverLetter.create({
+        data: {
+            content: body.toString('base64'),
+            applicationId: parseInt(applicationId),
+        },
+    })
 
     // finally create the Response with the correct Content-Type header for
     // a PDF

@@ -14,6 +14,7 @@ const schoolSchema = z.object({
     id: z.number().optional(),
     school: z.string(),
     degree: z.string().optional(),
+    location: z.string().optional(),
     graduationDate: z.string().optional(),
 })
 
@@ -67,12 +68,14 @@ export async function action({ request }) {
             update: {
                 school: school.school,
                 degree: school.degree,
+                location: school.location,
                 graduationDate: school.graduationDate,
             },
             create: {
                 userId: authUser!.id,
                 school: school.school,
                 degree: school.degree,
+                location: school.location,
                 graduationDate: school.graduationDate,
             },
         })
@@ -122,7 +125,7 @@ export default function EducationForm() {
 
 function SchoolFieldSet({ listName, index, ...config }) {
     const ref = useRef<HTMLFieldSetElement>(null)
-    const { school, degree, graduationDate, id } = useFieldset(ref, config)
+    const { school, degree, graduationDate, location, id } = useFieldset(ref, config)
 
     const [title, setTitle] = React.useState(school.defaultValue)
     return (
@@ -148,6 +151,13 @@ function SchoolFieldSet({ listName, index, ...config }) {
                 className="border-none p-2"
                 label="Degree"
                 placeholder="Degree"
+            />
+            <Input
+                type="text"
+                {...conform.input(location)}
+                className="border-none p-2"
+                label="Location"
+                placeholder="Location"
             />
             <Input
                 type="text"

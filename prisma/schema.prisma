@@ -9,7 +9,6 @@ datasource db {
 
 model User {
   id            Int           @id @default(autoincrement())
-  avatar        String?       @default("NULL")
   email         String        @unique
   passwordHash  String
   firstName     String?
@@ -19,21 +18,21 @@ model User {
   phoneNumber   String?
   linkedIn      String?
   github        String?
-  education     Education[]
   languages     String[]
   frameworks    String[]
   tools         String[]
   libraries     String[]
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
-  jobExperience UserJob[]
-  projects      Project[]
+  avatar        String?       @default("NULL")
   applications  Application[]
+  education     Education[]
+  projects      Project[]
+  jobExperience UserJob[]
 }
 
 model Education {
   id             Int      @id @default(autoincrement())
-  user           User     @relation(fields: [userId], references: [id])
   userId         Int
   school         String
   location       String   @default("NULL")
@@ -41,25 +40,27 @@ model Education {
   graduationDate String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+  user           User     @relation(fields: [userId], references: [id])
 }
 
 model Job {
-  id          Int          @id @default(autoincrement())
-  jobId       String       @unique
-  title       String
-  description String
-  salary      String?
-  keywords    String[]
-  company     String
-  location    String
-  source      Source
-  careersPage String?
-  application Application?
+  id              Int          @id @default(autoincrement())
+  title           String
+  description     String
+  salary          String?
+  keywords        String[]
+  company         String
+  location        String
+  source          Source
+  careersPage     String?
+  jobId           String       @unique
+  homePage        String?
+  descriptionHTML String?
+  application     Application?
 }
 
 model UserJob {
   id               Int      @id @default(autoincrement())
-  user             User     @relation(fields: [userId], references: [id])
   userId           Int
   company          String
   title            String
@@ -69,46 +70,47 @@ model UserJob {
   responsibilities String
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+  user             User     @relation(fields: [userId], references: [id])
 }
 
 model Project {
   id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id])
   userId    Int
   title     String
   bullets   String[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model Resume {
   id            Int         @id @default(autoincrement())
   pdfData       String
   applicationId Int         @unique
-  application   Application @relation(fields: [applicationId], references: [id])
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
+  application   Application @relation(fields: [applicationId], references: [id])
 }
 
 model Application {
   id          Int          @id @default(autoincrement())
-  user        User         @relation(fields: [userId], references: [id])
   userId      Int
-  job         Job          @relation(fields: [jobId], references: [id])
   jobId       Int          @unique
-  coverLetter CoverLetter?
-  resume      Resume?
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
+  job         Job          @relation(fields: [jobId], references: [id])
+  user        User         @relation(fields: [userId], references: [id])
+  coverLetter CoverLetter?
+  resume      Resume?
 }
 
 model CoverLetter {
   id            Int         @id @default(autoincrement())
-  application   Application @relation(fields: [applicationId], references: [id])
   applicationId Int         @unique
   content       String
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
+  application   Application @relation(fields: [applicationId], references: [id])
 }
 
 enum Source {

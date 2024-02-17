@@ -1,6 +1,6 @@
 import { authenticator } from '~/utils/auth.server'
 import invariant from 'tiny-invariant'
-import { jsonMode } from '~/utils/openai.server'
+import { jsonMode } from '~/utils/openai/resume.server'
 import { jsPDF } from 'jspdf'
 
 export async function createPDFResume(user) {

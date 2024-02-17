@@ -6,3 +6,7 @@
     width: 50px;
     vertical-align: middle;
 }
+
+.htmlDescription  * {
+    margin-bottom: 20px;
+}

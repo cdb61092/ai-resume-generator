@@ -8,6 +8,12 @@ export default {
     browserNodeBuiltinsPolyfill: {
         modules: {
             events: true,
+            fs: true,
+            buffer: true,
+            stream: true,
+            zlib: true,
+            url: true,
+            path: true,
         },
     },
     serverDependenciesToBundle: ['all'],

@@ -2,6 +2,7 @@ import { json, LoaderFunctionArgs } from '@remix-run/node'
 import { prisma } from '~/utils/prisma.server'
 import invariant from 'tiny-invariant'
 import { Form, Link, useLoaderData } from '@remix-run/react'
+import { JobDescription } from '~/components/JobDescription'
 
 export async function loader({ params }: LoaderFunctionArgs) {
     console.log('params in applications.$id')
@@ -27,8 +28,10 @@ export async function loader({ params }: LoaderFunctionArgs) {
 export default function Application() {
     let application = useLoaderData<typeof loader>()
     const {
-        job: { company, title, location, salary, description, keywords, source },
+        job: { company, title, location, salary, description, descriptionHTML, keywords, source },
     } = application
+    const noEmptyDivs = descriptionHTML?.replace(/<br>/g, '')
+
     return (
         <>
             <h2>
@@ -36,14 +39,7 @@ export default function Application() {
             </h2>
             <p>Salary: {salary}</p>
             <p>{location}</p>
-            <p className="text-lg">
-                {description.split('\n').map((line, index) => (
-                    <>
-                        {line}
-                        <br />
-                    </>
-                ))}
-            </p>
+            <JobDescription description={description} descriptionHTML={noEmptyDivs} />
             <p>Keywords: {keywords}</p>
             <p>Source: {source}</p>
             <div>
@@ -53,10 +49,24 @@ export default function Application() {
                         View Resume
                     </Link>
                 ) : (
-                    <Form method="post" action="/resources/resume/create" navigate={false}>
+                    <Form method="post" action={'/resources/resume/create'} navigate={false}>
                         <input type="hidden" name="jobDescription" value={description} />
                         <input type="hidden" name="applicationId" value={application.id} />
                         <button type="submit">Create Resume</button>
+                    </Form>
+                )}
+            </div>
+            <div>
+                <h3>Cover letter</h3>
+                {application.coverLetter ? (
+                    <Link to={`/coverLetter/${application.coverLetter.id}`} target="_blank">
+                        View Cover Letter
+                    </Link>
+                ) : (
+                    <Form method="post" action={'/resources/coverletter/create'} navigate={false}>
+                        <input type="hidden" name="jobDescription" value={description} />
+                        <input type="hidden" name="applicationId" value={application.id} />
+                        <button type="submit">Create Cover Letter</button>
                     </Form>
                 )}
             </div>
